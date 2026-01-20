@@ -1,0 +1,53 @@
+{
+    "name": "program-report-ui",
+    "version": "1.0.0",
+    "private": true,
+    "homepage": ".",
+    "dependencies": {
+        "@atlaskit/badge": "^18.3.3",
+        "@atlaskit/button": "^19.1.0",
+        "@atlaskit/checkbox": "^17.3.1",
+        "@atlaskit/css-reset": "^6.9.0",
+        "@atlaskit/datetime-picker": "^15.3.0",
+        "@atlaskit/dynamic-table": "^15.0.0",
+        "@atlaskit/form": "^10.4.0",
+        "@atlaskit/inline-edit": "^13.3.0",
+        "@atlaskit/lozenge": "^11.14.0",
+        "@atlaskit/modal-dialog": "^12.14.0",
+        "@atlaskit/progress-bar": "^4.0.0",
+        "@atlaskit/section-message": "^8.12.1",
+        "@atlaskit/select": "^18.1.0",
+        "@atlaskit/spinner": "^16.2.0",
+        "@atlaskit/tabs": "^18.3.3",
+        "@atlaskit/textfield": "^6.8.3",
+        "@atlaskit/tooltip": "^20.14.1",
+        "@forge/bridge": "^3.0.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "react-window": "^1.8.10"
+    },
+    "scripts": {
+        "start": "PORT=3002 react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}
