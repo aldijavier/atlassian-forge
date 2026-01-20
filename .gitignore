@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+static/epic-breakdown/node_modules/
+
+# Build artifacts
+**/static/*/build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Forge
+.forge/
+
+# Backups
+*.backup
+*.bak
+*.tmp
+
+# Environment
+.env
+.env.local
+
+# AI Assistant
+.claude/
+CLAUDE.md

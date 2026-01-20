@@ -1,0 +1,81 @@
+image: node:18
+
+definitions:
+  steps:
+    - step: &lint-and-test
+        name: Lint & Validate
+        caches:
+          - node
+        script:
+          - cd apps/epic-breakdown
+          - echo "Installing dependencies..."
+          - npm install
+          - cd static/epic-breakdown && npm install && cd ../..
+          - echo "Running forge lint..."
+          - npx @forge/cli@latest lint
+          - echo "Building frontend..."
+          - cd static/epic-breakdown && npm run build && cd ../..
+          - echo "✅ All checks passed!"
+        artifacts:
+          - apps/epic-breakdown/static/epic-breakdown/build/**
+    
+    - step: &deploy-development
+        name: Deploy to Development
+        deployment: development
+        caches:
+          - node
+        script:
+          - cd apps/epic-breakdown
+          - npm install
+          - cd static/epic-breakdown && npm install && npm run build && cd ../..
+          - echo "Deploying to development environment..."
+          - npx @forge/cli@latest deploy --non-interactive -e development
+          - echo "✅ Deployed to development!"
+        artifacts:
+          - apps/epic-breakdown/static/epic-breakdown/build/**
+    
+    - step: &deploy-production
+        name: Deploy to Production
+        deployment: production
+        trigger: manual
+        caches:
+          - node
+        script:
+          - cd apps/epic-breakdown
+          - npm install
+          - cd static/epic-breakdown && npm install && npm run build && cd ../..
+          - echo "Deploying to production environment..."
+          - npx @forge/cli@latest deploy --non-interactive -e production
+          - echo "✅ Deployed to production!"
+          - echo "⚠️  Don't forget to run 'forge install --upgrade' if you changed scopes!"
+        artifacts:
+          - apps/epic-breakdown/static/epic-breakdown/build/**
+
+pipelines:
+  # Run on all pull requests - this blocks merging if checks fail
+  pull-requests:
+    '**':
+      - step: *lint-and-test
+  
+  # Run on specific branches after merge
+  branches:
+    # Development branch - auto-deploy to dev environment
+    develop:
+      - step: *lint-and-test
+      - step: *deploy-development
+    
+    # Main branch - deploy to dev first, then manual approval for production
+    main:
+      - step: *lint-and-test
+      - step: *deploy-development
+      - step: *deploy-production
+
+  # Manual pipeline for hotfixes
+  custom:
+    deploy-dev-manual:
+      - step: *lint-and-test
+      - step: *deploy-development
+    
+    deploy-prod-manual:
+      - step: *lint-and-test
+      - step: *deploy-production

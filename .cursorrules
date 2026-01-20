@@ -1,0 +1,27 @@
+# AI Agent Rules for jira-forge
+
+## General Principles
+- **Read AGENTS.md**: Before starting any task, read [AGENTS.md](file:///c:/Users/USER/vscode/jira-forge/AGENTS.md) for detailed coding standards and Forge-specific instructions.
+- **Monorepo Context**: This is a monorepo. Always identify which app you are working on in `apps/`.
+- **Forge CLI**: Always run `forge` commands from the root directory of the specific app (e.g., `apps/epic-breakdown`).
+- **Pragmatism**: Prefer simple, vanilla JavaScript solutions using `@forge/react` (UI Kit).
+
+## Directory Structure Overview
+- `apps/epic-breakdown/`: Logic for story/task relations and breakdown management.
+- `apps/prd-sync-guardian/`: Logic for synchronizing PRD documents with Jira issues.
+- `apps/program-report/`: Logic for high-level program reporting.
+
+## Coding Standards
+- Use idiomatic JavaScript.
+- Include verbose commentary for complex logic.
+- **NO REACT DOM**: Only use components from `@forge/react`. Never use `<div>`, `<span>`, etc.
+- **Table Usage**: Always use `DynamicTable`, never `Table`.
+
+## Deployment & Verification
+- Run `forge lint` before proposing a deployment.
+- Use `deploy.sh` or `deploy-app-script.sh` for production deployments as per [COMPANY-DEPLOYMENT-GUIDE.md](file:///c:/Users/USER/vscode/jira-forge/COMPANY-DEPLOYMENT-GUIDE.md).
+- Update the version number in the app's `package.json` or frontend code when making functional changes.
+
+## Communication
+- If a requirement is unclear, ask for clarification.
+- Suggest alternatives if a feature is not natively supported by Forge.
